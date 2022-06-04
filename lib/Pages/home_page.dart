@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 final searchController=TextEditingController();
-
 class Home extends StatefulWidget {
   const Home({ Key? key }) : super(key: key);
 
@@ -11,12 +10,15 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
+
+
 class _HomeState extends State<Home> {
   TextEditingController searchController=TextEditingController();
   @override
   
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
       drawer: const Drawer(),
@@ -31,10 +33,8 @@ class _HomeState extends State<Home> {
         ),
         actions: [ 
           Padding(padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-            child: IconButton(
-              onPressed: () {}, 
-              icon: const Icon(Icons.account_circle,size: 40)
-            )
+            child: IconButton(onPressed: () {} , icon: const Icon(Icons.person)),
+            
           ),
         ],
       ),
@@ -70,10 +70,13 @@ class _HomeState extends State<Home> {
               child:  StreamBuilder(
                 stream: FirebaseFirestore.instance.collection('restaurants').snapshots(), 
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) { 
-                return ListView(
-                children: snapshot.data!.docs.map((restaurant){
-                return  Center(
-                  child: ListTile(
+                  if(!snapshot.hasData){
+                    return const Center(child: Text("Loading..."),);
+                  }
+                 return ListView(
+                  children: snapshot.data!.docs.map((restaurant){
+                    return  Center(
+                    child: ListTile(
                     leading: Padding(padding: const EdgeInsets.fromLTRB(20, 5, 0, 0),
                       child: Container(
                         decoration: BoxDecoration(
@@ -106,4 +109,5 @@ class _HomeState extends State<Home> {
         ),
         );
   }
+  
 }
