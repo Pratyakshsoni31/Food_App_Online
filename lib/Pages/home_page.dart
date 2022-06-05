@@ -1,6 +1,8 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 final searchController=TextEditingController();
 class Home extends StatefulWidget {
@@ -10,13 +12,62 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-
+final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+        GoogleSignInAccount? user=_googleSignIn.currentUser;
 
 class _HomeState extends State<Home> {
+  
   TextEditingController searchController=TextEditingController();
   @override
   
   Widget build(BuildContext context) {
+    final args = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+    void _showPopupMenu() async {
+await showMenu(
+  context: context,
+  position: const RelativeRect.fromLTRB(100, 80, 0, 100),
+  items: [
+     PopupMenuItem(
+      child: TextButton(onPressed: () async {
+        Colors.transparent;
+        if(args['x']==2){
+          await FirebaseAuth.instance.signOut();
+        setState(() {
+            Navigator.pushNamed(context, "/");
+        });
+        }
+        
+        if(args['x']==3){
+          await _googleSignIn.signIn();
+          setState(() {
+              Navigator.pushNamed(context, "/");
+          });
+        }
+      }, child: const Text("Log out",style: TextStyle(color: Colors.black,),),
+      )
+    ),
+  ],
+  elevation: 8.0,
+);
+}
+void _showPopupMenu1() async {
+await showMenu(
+  context: context,
+  position: const RelativeRect.fromLTRB(100, 80, 0, 100),
+  items: [
+     PopupMenuItem(
+      child: TextButton(onPressed: () async {
+        Colors.transparent;
+        if(args['x']==1){
+          Navigator.pushNamed(context, "/");
+        }
+      }, child: const Text("Back to Login Page",style: TextStyle(color: Colors.black,),),
+      )
+    ),
+  ],
+  elevation: 8.0,
+);
+}
     return Scaffold(
       
       backgroundColor: Colors.white,
@@ -33,7 +84,14 @@ class _HomeState extends State<Home> {
         ),
         actions: [ 
           Padding(padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-            child: IconButton(onPressed: () {} , icon: const Icon(Icons.person)),
+            child: IconButton(onPressed: () async {
+              if(args['x']==2||args['x']==3){
+                _showPopupMenu();
+              }
+              else if(args['x']==1){
+                _showPopupMenu1();
+              }
+            } , icon: const Icon(Icons.person)),
             
           ),
         ],
@@ -108,6 +166,7 @@ class _HomeState extends State<Home> {
           ],
         ),
         );
+        
   }
   
 }

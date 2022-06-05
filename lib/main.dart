@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'Pages/onboarding_page.dart';
@@ -26,6 +27,7 @@ class _MainState extends State<Main> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: FirebaseAuth.instance.currentUser!=null? "/home" : "/",
       routes: {
         "/": (context) => const Onboarding(),
         "/signin":(context) => const Signin(),

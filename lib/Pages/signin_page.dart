@@ -131,7 +131,7 @@ class _SigninState extends State<Signin> {
                     password: passwordController.text
                     );
                     setState(() {
-                      Navigator.pushNamed(context, "/home");
+                      Navigator.pushNamed(context, "/home",arguments: { 'x' : 2});
                     });
 
                 },
@@ -152,11 +152,12 @@ class _SigninState extends State<Signin> {
                 ),  
                 fixedSize: const Size(300, 55), primary: Colors.blue[800]),
                 onPressed: () async{
-                  await _googleSignIn.signIn();
+                  await _googleSignIn.signIn(
+                  );
                   setState(() {
                     if(user!=null)
                     {
-                      Navigator.pushNamed(context, "/home");
+                      Navigator.pushNamed(context, "/home",arguments: { 'x' : 3});
                     }
                   });
                 },

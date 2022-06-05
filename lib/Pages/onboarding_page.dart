@@ -9,7 +9,7 @@ class Onboarding extends StatefulWidget {
   @override
   State<Onboarding> createState() => _OnboardingState();
 }
-
+int x=0;
 class _OnboardingState extends State<Onboarding> {
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
@@ -63,9 +63,9 @@ class _OnboardingState extends State<Onboarding> {
                 onPressed: () async {
                   await _googleSignIn.signIn();
                   setState(() {
-                    if(user!=null)
+                    if(user?.email !=null)
                     {
-                      Navigator.pushNamed(context, "/home");
+                      Navigator.pushNamed(context, "/home",arguments: { 'x' : 3});
                     }
                   });
                 },
@@ -104,7 +104,7 @@ class _OnboardingState extends State<Onboarding> {
             child: const Text("Search Now",style: TextStyle(color: Color.fromARGB(255, 233, 103, 3))),
             style: TextButton.styleFrom(fixedSize: const Size.fromHeight(5)),
             onPressed: () {
-              Navigator.pushNamed(context, "/home");
+              Navigator.pushNamed(context, "/home",arguments: { 'x' : 1});
             },
             ),
               ],
