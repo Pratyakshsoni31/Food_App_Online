@@ -166,7 +166,6 @@ class _SigninState extends State<Signin> {
             Padding(padding: const EdgeInsets.fromLTRB(65, 10, 0, 0),
              child: Row(
               children: [
-                const Center(),
                 const Text("I already have an account ?",
             style: TextStyle(
                 decoration: TextDecoration.none,

@@ -22,8 +22,8 @@ class _OnboardingState extends State<Onboarding> {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.fromLTRB(30,30,50,30),
-            child: Image.asset("assets/onboarding.png",
+            padding: const EdgeInsets.fromLTRB(30,30,30,0),
+            child: Image.asset("assets/onbd.png",
           height: 300,
           width: 300,
           ),),
