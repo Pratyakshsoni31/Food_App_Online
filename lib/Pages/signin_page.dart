@@ -48,141 +48,160 @@ class _SigninState extends State<Signin> {
                 color: Color.fromARGB(255, 97, 95, 95)),
               ),   
             ),
-          const Padding(padding: EdgeInsets.fromLTRB(27, 55, 0, 0),
-          child: Text(
-              "Your Email",
-              textAlign: TextAlign.center,
-            style: TextStyle(
-                decoration: TextDecoration.none,
-                fontSize: 15,
-                color: Color.fromARGB(255, 97, 95, 95)),
-            ),    
+          Center(
+            child: Padding(padding: const EdgeInsets.fromLTRB(0, 40, 0, 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: const Color.fromARGB(248, 248, 248, 255),
+                ),
+                width: 330,
+                height: 265,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                         const Padding(padding: EdgeInsets.fromLTRB(13, 25, 0, 0),
+                           child: Text(
+                                               "Your Email",
+                                               textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                                 decoration: TextDecoration.none,
+                                                 fontSize: 15,
+                                                 color: Color.fromARGB(255, 97, 95, 95)),
+                                  ),
+                         ),
+                      
+                    Padding(padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      child: SizedBox(
+                      width: 300,
+                      child: TextField(
+                      decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      ),
+                      hintText: "Enter Email ID",
+                      labelStyle: const TextStyle(
+                       fontSize: 15 
+                      ),
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                                 ),
+                                 controller: emailController,
+                                ),
+                                ),
+                    ),
+                    const Padding(padding: EdgeInsets.fromLTRB(13, 25, 0, 0),
+                      child: Text(
+                        "Password",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                        decoration: TextDecoration.none,
+                        fontSize: 15,
+                        color: Color.fromARGB(255, 97, 95, 95)),
+                      ),
+                    ),
+                    Padding(padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                      child: SizedBox(
+                      width: 300,
+                      child: TextField(
+                                decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      ),
+                      hintText: "Enter Password",
+                      labelStyle: const TextStyle(
+                       fontSize: 15 
+                      ),
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                                 ),
+                                 controller: passwordController,
+                                 obscureText: true,
+                                ),
+                                ),
+                    ),
+                  
+                    
+                  ],
+                  ),
+                
+              ),
+            ),
           ),
-
-            Padding(padding: const EdgeInsets.fromLTRB(27, 10, 0, 0),
-            child: SizedBox(
-              width: 300,
-              child: TextField(
-              decoration: InputDecoration(
-              border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              ),
-              hintText: "Enter Email ID",
-              labelStyle: const TextStyle(
-               fontSize: 15 
-              ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-             ),
-             controller: emailController,
-            ),
-            )
-            ),
-
-            const Padding(
-              padding: EdgeInsets.fromLTRB(27, 25, 0, 0),
-              child: Text(
-                "Password",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                decoration: TextDecoration.none,
-                fontSize: 15,
-                color: Color.fromARGB(255, 97, 95, 95)),
-              ),    
-            ),
-
-            Padding(padding: const EdgeInsets.fromLTRB(27, 10, 0, 0),
-
-            child: SizedBox(
-              width: 300,
-              child: TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              ),
-              hintText: "Enter Password",
-              labelStyle: const TextStyle(
-               fontSize: 15 
-              ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-             ),
-             controller: passwordController,
-             obscureText: true,
-            ),
-            ),
-            ),
-
-              Padding(padding: const EdgeInsets.fromLTRB(27, 60, 0, 0),
-              child: ElevatedButton(
-                child: const Text(
-                "SIGN IN",
-                style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                ),
-              ),
-                style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-                ),  
-                fixedSize: const Size(300, 55), primary: const Color.fromARGB(255, 233, 103, 3)),
-                onPressed: () async {
-                  await FirebaseAuth.instance.signInWithEmailAndPassword(
-                    email: emailController.text, 
-                    password: passwordController.text
-                    );
-                    setState(() {
-                      Navigator.pushNamed(context, "/home",arguments: { 'x' : 2});
-                    });
-
-                },
-              ),
-              ),
-              Padding(padding: const EdgeInsets.fromLTRB(27, 45, 0, 0),
-              child: ElevatedButton(
-                child: const Text(
-                "SIGN IN WITH GOOGLE",
-                style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                ),
-              ),
-                style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-                ),  
-                fixedSize: const Size(300, 55), primary: Colors.blue[800]),
-                onPressed: () async{
-                  await _googleSignIn.signIn(
-                  );
-                  setState(() {
-                    if(user!=null)
-                    {
-                      Navigator.pushNamed(context, "/home",arguments: { 'x' : 3});
-                    }
-                  });
-                },
-                ),
-              ),
-            Padding(padding: const EdgeInsets.fromLTRB(65, 10, 0, 0),
-             child: Row(
-              children: [
-                const Text("I already have an account ?",
-            style: TextStyle(
-                decoration: TextDecoration.none,
-                fontSize: 13.8,
-                color: Colors.black),
-            ),
-            TextButton(
-            child: const Text("Sign Up",style: TextStyle(color: Color.fromARGB(255, 233, 103, 3))),
-            style: TextButton.styleFrom(fixedSize: const Size.fromHeight(5)),
-            onPressed: () {
-              Navigator.pushNamed(context, "/signup");
-            },
-            ),
-              ],
-            )   ,
-            ),
-            
+          Column(
+            children: [
+              Padding(padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: ElevatedButton(
+                      child: const Text(
+                      "SIGN IN",
+                      style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                      style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      ),  
+                      fixedSize: const Size(300, 55), primary: const Color.fromARGB(255, 233, 103, 3)),
+                      onPressed: () async {
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: emailController.text, 
+                          password: passwordController.text
+                          );
+                          setState(() {
+                            Navigator.pushNamed(context, "/home",arguments: { 'x' : 2});
+                          });
+                  
+                      },
+                    ),
+                  ),
+                  Padding(padding: const EdgeInsets.fromLTRB(0, 45, 0, 0),
+                    child: ElevatedButton(
+                      child: const Text(
+                      "SIGN IN WITH GOOGLE",
+                      style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                      style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      ),  
+                      fixedSize: const Size(300, 55), primary: Colors.blue[800]),
+                      onPressed: () async{
+                        await _googleSignIn.signIn(
+                        );
+                        setState(() {
+                          if(user!=null)
+                          {
+                            Navigator.pushNamed(context, "/home",arguments: { 'x' : 3});
+                          }
+                        });
+                      },
+                      ),
+                  ),
+                       Padding(padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                        child: Row(
+                                    children: [
+                        const Text("I already have an account ?",
+                                  style: TextStyle(
+                        decoration: TextDecoration.none,
+                        fontSize: 13.8,
+                        color: Colors.black),
+                                  ),
+                                  TextButton(
+                                  child: const Text("Sign Up",style: TextStyle(color: Color.fromARGB(255, 233, 103, 3))),
+                                  style: TextButton.styleFrom(fixedSize: const Size.fromHeight(5)),
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, "/signup");
+                                  },
+                                  ),
+                                    ],
+                                  ),
+                      ),
+                    
+            ],
+          ),
           ],
 
         )
