@@ -70,24 +70,23 @@ class _SigninState extends State<Signin> {
                                                  color: Color.fromARGB(255, 97, 95, 95)),
                                   ),
                          ),
-                      
                     Padding(padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                       child: SizedBox(
-                      width: 300,
-                      child: TextField(
-                      decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                        width: 300,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4.6),
+                            ),
+                            hintText: "Enter Email ID",
+                            labelStyle: const TextStyle(
+                              fontSize: 15 
+                            ),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                          ),
+                          controller: emailController,
+                        ),
                       ),
-                      hintText: "Enter Email ID",
-                      labelStyle: const TextStyle(
-                       fontSize: 15 
-                      ),
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                                 ),
-                                 controller: emailController,
-                                ),
-                                ),
                     ),
                     const Padding(padding: EdgeInsets.fromLTRB(13, 25, 0, 0),
                       child: Text(
@@ -105,24 +104,21 @@ class _SigninState extends State<Signin> {
                       child: TextField(
                                 decoration: InputDecoration(
                       border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(4.6),
                       ),
                       hintText: "Enter Password",
                       labelStyle: const TextStyle(
                        fontSize: 15 
                       ),
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                                 ),
-                                 controller: passwordController,
-                                 obscureText: true,
-                                ),
-                                ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                          ),
+                          controller: passwordController,
+                          obscureText: true,
+                        ),
+                      ),
                     ),
-                  
-                    
                   ],
-                  ),
-                
+                ),
               ),
             ),
           ),
@@ -149,8 +145,8 @@ class _SigninState extends State<Signin> {
                           );
                           setState(() {
                             Navigator.pushNamed(context, "/home",arguments: { 'x' : 2});
-                          });
-                  
+                          }
+                        );
                       },
                     ),
                   ),
