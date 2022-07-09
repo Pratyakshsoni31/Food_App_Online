@@ -129,7 +129,9 @@ await showMenu(
                 stream: FirebaseFirestore.instance.collection('restaurants').snapshots(), 
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) { 
                   if(!snapshot.hasData){
-                    return const Center(child: Text("Loading..."),);
+                    return const Center(child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+                    ),);
                   }
                  return ListView(
                   children: snapshot.data!.docs.map((restaurant){
